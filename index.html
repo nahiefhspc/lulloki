@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIENS</title>
+    <link rel="icon" href="https://i.ibb.co/8TgdrFJ/x.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #260D2B;
+            padding-top: 70px;
+        }
+        .header {
+            background-color: #0A0D09;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                font-size: 18px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+         .circle-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .circle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .card { position: relative; border: 1px solid #ccc; border-radius: 20px; margin: 20px; padding: 30px; background-color: #fff; cursor: pointer; font-size: 25px; font-weight: bold; transition: background-color 0.3s, transform 0.3s; border-left: 6px solid #34C759; }
+
+        .second-card { font-size: 20px; padding: 25px; width: 75%; margin: 20px auto; border-radius: 10px; border-left: 6px solid #FF5733; }
+         
+       .third-card { font-size: 30px; padding: 25px; width: 75%; margin: 20px auto; border-radius: 10px; border-left: 6px solid #FF5733; }
+
+        .card svg { position: absolute; top: 50%; right: 20px; transform: translateY(-50%); fill: #34C759; }
+
+        .second-card svg { fill: #FF5733; }
+        .third-card svg { fill: #FF5733; }
+        
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(113, 51, 255, 0.5), 0 6px 15px rgba(113, 51, 255, 0.3);
+        }
+
+       .second-card:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 4px 10px rgba(255, 87, 51, 0.5), 0 6px 15px rgba(255, 87, 51, 0.3);
+        }
+        
+      .third-card:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 4px 10px rgba(255, 87, 51, 0.5), 0 6px 15px rgba(255, 87, 51, 0.3);
+        }
+        
+
+        .subcards {
+            display: none;
+            padding-left: 20px;
+        }
+
+       .subcard { position: relative; border: 1px solid #ddd; border-radius: 5px; margin: 10px 0; padding: 10px; background-color: #fff; cursor: pointer; font-size: 15px; font-weight: bold; transition: background-color 1s, transform 1s; border-left: 6px solid #00FFFF; }
+
+       .subcard svg {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            fill: #00FFFF;
+            opacity: 0;
+            transition: opacity 0.3s;
+       }
+
+       .subcard:hover svg {
+            opacity: 1;
+       }
+
+       .subcard:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 4px 10px rgba(0, 255, 255, 0.5), 0 6px 15px rgba(0, 255, 255, 0.3);
+       }
+
+      .button-container {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 1000;
+      }
+
+      .btn {
+          display: flex;
+          align-items: center;
+          background-color: #DB953F;
+          color: #4D062E;
+          border: none;
+          border-radius: 25px;
+          padding: 10px 20px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s, transform 0.3s;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          text-decoration: none;
+      }
+
+      .btn svg {
+          margin-right: 10px;
+      }
+
+      .btn:hover {
+          background-color: #05a044;
+          transform: translateY(-3px);
+      }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .popup-message {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .popup-btn {
+            display: block; /* Stacks buttons vertically */
+            margin: 10px auto; /* Centers buttons with vertical spacing */
+            padding: 10px 20px;
+            background: #00034F; /* Green background */
+            color: #DCE216; /* Blue text */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            width: fit-content; /* Ensures button width fits content */
+        }
+
+        .popup-btn:hover {
+            background: #218838; /* Darker green on hover */
+        }
+
+        .button-container-1 {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 50%;
+            height: 50%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup()">×</button>
+            <div class="popup-message" id="popupMessage">This Popup message closed in <span id="countdown">10</span> seconds</div>
+            <p style="color: #449F75; font-size:24px;">JEE Material & Instant Doubt Solving by CareerWill JEE 🔴</p>
+              <p style="color: #141C3A; font-size:15px;">𝗝𝗼𝗶𝗻 𝗙𝗮𝘀𝘁 𝗟𝗶𝗻𝗸 𝗘𝘅𝗽𝗶𝗿𝗲𝘀 𝗶𝗻 𝗙𝗲𝘄 𝗠𝗶𝗻𝘂𝘁𝗲𝘀👇</p>
+            <img src="https://i.ibb.co/r25Y27mh/x.jpg" alt="Popup Image">
+            <div class="button-container-1">
+                <a href="https://t.me/+BBZXXuR2XCNkMzFl" class="popup-btn">𝗝𝗢𝗜𝗡 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 🌟</a>
+                <a href="https://t.me/+BBZXXuR2XCNkMzFl" class="popup-btn">𝗝𝗢𝗜𝗡 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 🌟</a>
+       <p style="color: #490214; font-size:20px;">𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚 𝐎𝐅𝐅𝐈𝐂𝐈𝐀𝐋 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🔥</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let countdownInterval;
+
+        // Function to show popup and start countdown
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+            let seconds = 10;
+            const countdownElement = document.getElementById('countdown');
+
+            // Update countdown every second
+            countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    closePopup();
+                }
+            }, 1000);
+
+            // Ensure popup closes after 5 seconds
+            setTimeout(closePopup, 10000);
+        }
+
+        // Function to close popup
+        function closePopup() {
+            clearInterval(countdownInterval); // Stop countdown
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Show popup when page loads
+        window.onload = showPopup;
+    </script>
+    <div class="header">
+         <marquee behavior="alternate" direction="left" scrollamount="2" width="100%" height="30" onmouseover="this.stop()" onmouseout="this.start()" loop="10000" style="animation: slide 5s linear infinite alternate; font-size: 2em; color: yellow;">By HACKHEIST 😈</marquee>
+    </div>
+
+    <h1 style="color: #FFA05C; justify-content: center; font-size:30px;">𝗔𝗟𝗜𝗘𝗡 (𝗝𝗔𝗗𝗨)🔥</h1>
+
+</div>
+ <div style="display: flex; justify-content: center; height: 8vh;">
+  <button style="background-color:#8BA3E9; color:white; padding:15px 40px; font-size:24px; border-radius: 10px;"><a href="https://yashyasag.github.io/hiddens_officials" style="color:#1E080B; text-decoration:none;">𝗢𝘂𝗿 𝗠𝗔𝗜𝗡 𝗪𝗲𝗯𝘀𝗶𝘁𝗲</a></button>
+</div>
+    <script type="text/javascript">
+	atOptions = {
+		'key' : '5ae91f4f0425aee3ba3d961dbf012303',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/5ae91f4f0425aee3ba3d961dbf012303/invoke.js"></script>
+
+    <div id="cards-container">
+         <!-- Cards div through JS -->
+    </div>
+    <div class="button-container">
+         <a href="https://t.me/HIDDEN_OFFICIALS_5" class="btn" target="_blank" rel="noopener noreferrer">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+          </svg>
+          <span>JOiN BACKUP</span>
+       </a>
+    </div>
+<script>
+const firstcardsData = [
+         {
+        text: '𝗟𝗨𝗟𝗟𝗔𝗡 𝗟𝗲𝗰𝘁𝘂𝗲𝗿𝘀 𝟭',
+        secondcards: [
+            {
+                text: 'Rahul Yadav Nurture Physics',
+                subcards: [
+                    { text: 'Units Dimension Error', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNTM1NTYwMTExODE1Mzc2LTIxNTQyNTc3NTY0NjAyOTUy'},
+{ text: 'Vectors', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNTQzNTgwMDU3ODU4MzIwLTIxNTU3NjE0OTYzNDMzNDcy'},
+{ text: 'Kinematics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNTU4NjE3NDU2Njg4ODQwLTIxNTg3Njg5NzYxMDk0NTEy'},
+{ text: 'NLM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNTg4NjkyMjU0MzQ5ODgwLTIxNjAyNzI3MTU5OTI1MDMy'},
+{ text: 'Friction', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjAzNzI5NjUzMTgwNDAwLTIxNjExNzQ5NTk5MjIzMzQ0'},
+{ text: 'Circular Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjEyNzUyMDkyNDc4NzEyLTIxNjIyNzc3MDI1MDMyMzky'},
+{ text: 'Work Power Energy', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjIzNzc5NTE4Mjg3NzYwLTIxNjM3ODE0NDIzODYyOTEy'},
+{ text: 'COM Collision', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjM4ODE2OTE3MTE4MjgwLTIxNjU0ODU2ODA5MjA0MTY4'},
+{ text: 'Rotational Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjU1ODU5MzAyNDU5NTM2LTIxNjc3OTE0MTU0MDc3NjMy'},
+{ text: 'Elasticity, Calorimetry, Heat Transfer', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjc4OTE2NjQ3MzMzMDAwLTIxNjk4OTY2NTEyNDQwMzYw'},
+{ text: 'KTG', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNjk5OTY5MDA1Njk1NzI4LTIxNzAwOTcxNDk4OTUxMDk2'},
+{ text: 'Thermodynamics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzAxOTczOTkyMjA2NDY0LTIxNzA4OTkxNDQ0OTk0MDQw'},
+{ text: 'Fluid Mechanics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzA5OTkzOTM4MjQ5NDA4LTIxNzI1MDMxMzM3MDc5OTI4'}
+                ]
+            },
+            {
+                text: 'Puneet Agarwal Nurture Physics',
+                subcards: [
+                    { text: 'Puneet Agarwal Nurture Physics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzI3MDM2MzIzNTkwNjY0LTIxNzMwMDQzODAzMzU2NzY4'}
+                ]
+            },
+            {
+                text: 'Sachin Singh Sir (Mechanics Only) [Author of Pathfinder]',
+                subcards: [
+                    { text: 'Kinematics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzMzMDUxMjgzMTIyODcyLTIxNzQ1MDgxMjAyMTg3Mjg4'},
+{ text: 'NLM  1�71ￄ1�77 Friction', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzQ2MDgzNjk1NDQyNjU2LTIxNzU3MTExMTIxMjUxNzA0'},
+{ text: 'Circular Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzU4MTEzNjE0NTA3MDcyLTIxNzYyMTIzNTg3NTI4NTQ0'},
+{ text: 'Work Power Energy', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzYzMTI2MDgwNzgzOTEyLTIxNzcyMTQ4NTIwMDgyMjI0'},
+{ text: 'COM Collision', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzczMTUxMDEzMzM3NTkyLTIxNzg2MTgzNDI1NjU3Mzc2'},
+{ text: 'Rotational Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxNzg3MTg1OTE4OTEyNzQ0LTIxNzk4MjEzMzQ0NzIxNzky'}
+                ]
+            },
+            {
+                text: 'AG Sir Nurture Maths',
+                subcards: [
+                    {text: 'FOM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODAwMjE4MzMxMjMyNTI4LTIxODAwMjE4MzMxMjMyNTI4'},
+{ text: 'Quadratic Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODAxMjIwODI0NDg3ODk2LTIxODAxMjIwODI0NDg3ODk2'},
+{ text: 'Logarithm', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODAyMjIzMzE3NzQzMjY0LTIxODAyMjIzMzE3NzQzMjY0'},
+{ text: 'Trigonometry Equation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODAzMjI1ODEwOTk4NjMyLTIxODAzMjI1ODEwOTk4NjMy'},
+{ text: 'Compound Angles', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODA0MjI4MzA0MjU0MDAwLTIxODA0MjI4MzA0MjU0MDAw'},
+{ text: 'Sequence Series', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODA1MjMwNzk3NTA5MzY4LTIxODA1MjMwNzk3NTA5MzY4'},
+{ text: 'FOM 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODA2MjMzMjkwNzY0NzM2LTIxODA2MjMzMjkwNzY0NzM2'},
+{ text: 'SOT', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODA3MjM1Nzg0MDIwMTA0LTIxODA3MjM1Nzg0MDIwMTA0'},
+{ text: 'HD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODA4MjM4Mjc3Mjc1NDcyLTIxODA4MjM4Mjc3Mjc1NDcy'},
+{ text: 'Determinants', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODA5MjQwNzcwNTMwODQwLTIxODA5MjQwNzcwNTMwODQw'},
+{ text: 'Circle', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODEwMjQzMjYzNzg2MjA4LTIxODEwMjQzMjYzNzg2MjA4'},
+{ text: 'Straight Lines', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODExMjQ1NzU3MDQxNTc2LTIxODExMjQ1NzU3MDQxNTc2'},
+{ text: 'PNC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODEyMjQ4MjUwMjk2OTQ0LTIxODEyMjQ4MjUwMjk2OTQ0'},
+{ text: 'Conic Section', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODEzMjUwNzQzNTUyMzEyLTIxODEzMjUwNzQzNTUyMzEy'},
+{ text: 'Binomial Theorem', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODE0MjUzMjM2ODA3NjgwLTIxODE0MjUzMjM2ODA3Njgw'}
+                ]
+            },
+            {
+                text: 'SKV Sir & Gautam Sir Nurture Maths',
+                subcards: [
+                    { text: 'SKV Sir & Gautam Sir Nurture Maths', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODE2MjU4MjIzMzE4NDE2LTIxODE4MjYzMjA5ODI5MTUy'}
+                ]
+            },
+            
+{
+                text: 'BS Sir & SKV Sir Nurture Live Batch',
+                subcards: [
+                    {  text: 'Fundamental of Maths', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODIwMjY4MTk2MzM5ODg4LTIxODQ3MzM1NTE0MjM0ODI0'},
+{ text: 'Quadratic Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODQ4MzM4MDA3NDkwMTkyLTIxODU5MzY1NDMzMjk5MjQw'},
+{ text: 'Logarithm', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODYwMzY3OTI2NTU0NjA4LTIxODYxMzcwNDE5ODA5OTc2'},
+{ text: 'Sequence Series', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODYyMzcyOTEzMDY1MzQ0LTIxODczNDAwMzM4ODc0Mzky'},
+{ text: 'Trigonometry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODc0NDAyODMyMTI5NzYwLTIxODg1NDMwMjU3OTM4ODA4'},
+{ text: 'Trigonometric Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODg2NDMyNzUxMTk0MTc2LTIxODkyNDQ3NzEwNzI2Mzg0'},
+{ text: 'SOT', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxODkzNDUwMjAzOTgxNzUyLTIxOTEwNDkyNTg5MzIzMDA4'},
+{ text: 'Determinants', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTExNDk1MDgyNTc4Mzc2LTIxOTE0NTAyNTYyMzQ0NDgw'},
+{ text: 'Straight Lines', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTE1NTA1MDU1NTk5ODQ4LTIxOTMxNTQ0OTQ3Njg1NzM2'},
+{ text: 'Circle', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTMyNTQ3NDQwOTQxMTA0LTIxOTQyNTcyMzczNDk0Nzg0'},
+{ text: 'Conic Section', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTQzNTc0ODY2NzUwMTUyLTIxOTY3NjM0NzA0ODc4OTg0'},
+{ text: 'PNC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTY4NjM3MTk4MTM0MzUyLTIxOTgzNjc0NTk2OTY0ODcy'},
+{ text: 'Binomial Theorem', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTg0Njc3MDkwMjIwMjQwLTIxOTkxNjk0NTQzMDA3ODE2'},
+{ text: 'Sets Relation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTkyNjk3MDM2MjYzMTg0LTIxOTk1NzA0NTE2MDI5Mjg4'}
+                ]
+            },
+            {
+                text: 'Vimal Sir Nurture Physical Chemistry',
+                subcards: [
+                    { text: 'Mole Concept', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTk3NzA5NTAyNTQwMDI0LTIxOTk3NzA5NTAyNTQwMDI0'},
+{ text: 'Concentration Terms', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTk4NzExOTk1Nzk1MzkyLTIxOTk4NzExOTk1Nzk1Mzky'},
+{ text: 'Redox Reaction', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIxOTk5NzE0NDg5MDUwNzYwLTIxOTk5NzE0NDg5MDUwNzYw'},
+{ text: 'Ideal Gas', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDAwNzE2OTgyMzA2MTI4LTIyMDAwNzE2OTgyMzA2MTI4'},
+{ text: 'Real Gas', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDAxNzE5NDc1NTYxNDk2LTIyMDAxNzE5NDc1NTYxNDk2'},
+{ text: 'Chemical Equilibrium', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDAyNzIxOTY4ODE2ODY0LTIyMDAyNzIxOTY4ODE2ODY0'},
+{ text: 'Atomic Structure', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDAzNzI0NDYyMDcyMjMyLTIyMDAzNzI0NDYyMDcyMjMy'}
+                ]
+            },
+            {
+                text: 'SANJAY SODHANI NUTURE',
+                subcards: [
+                    { text: 'Quantum Number & Electronic Configuration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDU2ODU2NjA0NjA2NzM2LTIyMDY2ODgxNTM3MTYwNDE2'},
+{ text: 'PERIODIC TABLE', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDY3ODg0MDMwNDE1Nzg0LTIyMDg2OTMxNDAyMjY3Nzc2'},
+{ text: 'CHEMICAL BONDING', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMDg3OTMzODk1NTIzMTQ0LTIyMTEyOTk2MjI2OTA3MzQ0'}
+                ]
+            },{
+                text: 'Nurture Organic Chemistry Dhakad Sir ',
+                subcards: [
+                    { text: 'Nomenclature', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTIwMDEzNjc5Njk0OTIwLTIyMTMyMDQzNTk4NzU5MzM2'},
+{ text: 'General Organic Chemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTMzMDQ2MDkyMDE0NzA0LTIyMTUxMDkwOTcwNjExMzI4'}
+                ]
+            },{
+                text: 'Nurture Organic NSR Sir',
+                subcards: [
+                    { text: 'Nurture Organic NSR Sir', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTUzMDk1OTU3MTIyMDY0LTIyMTUzMDk1OTU3MTIyMDY0'}
+                ]
+            },{
+                text: 'Sandeep Sethia Nurture Organic',
+                subcards: [
+                    { text: 'Sandeep Sethia Nurture Organic', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTU0MDk4NDUwMzc3NDMyLTIyMTU0MDk4NDUwMzc3NDMy'}
+                ]
+            },
+            {
+                text: 'Sachin Singh Enthuse Physics',
+                subcards: [
+                    { text: 'Electrostatics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTU3MTA1OTMwMTQzNTM2LTIyMTU4MTA4NDIzMzk4OTA0'},
+{ text: 'Current Electricity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTU5MTEwOTE2NjU0MjcyLTIyMTU5MTEwOTE2NjU0Mjcy'},
+{ text: 'Capacitor (from 19)', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTYwMTEzNDA5OTA5NjQwLTIyMTYwMTEzNDA5OTA5NjQw'},
+{ text: 'Magnetic Effect of Current', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTYxMTE1OTAzMTY1MDA4LTIyMTYyMTE4Mzk2NDIwMzc2'},
+{ text: 'Magnetism & Matter', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTYzMTIwODg5Njc1NzQ0LTIyMTY0MTIzMzgyOTMxMTEy'},
+{ text: 'EMI AC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTY1MTI1ODc2MTg2NDgwLTIyMTY2MTI4MzY5NDQxODQ4'},
+{ text: 'Waves Theory & Sound Waves', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTY3MTMwODYyNjk3MjE2LTIyMTY4MTMzMzU1OTUyNTg0'},
+{ text: 'Wave Optics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTY5MTM1ODQ5MjA3OTUyLTIyMTcxMTQwODM1NzE4Njg4'},
+{ text: 'Ray Optics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTcyMTQzMzI4OTc0MDU2LTIyMTgzMTcwNzU0NzgzMTA0'},
+{ text: 'SHM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTg0MTczMjQ4MDM4NDcyLTIyMTg4MTgzMjIxMDU5OTQ0'}
+                ]
+            },{
+                text: 'NITESH BATRA ENTHUSE PHYSICS',
+                subcards: [
+                    { text: 'CAPACITOR', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTg5MTg1NzE0MzE1MzEyLTIyMTkwMTg4MjA3NTcwNjgw'},
+{ text: 'SHM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTkxMTkwNzAwODI2MDQ4LTIyMTkzMTk1Njg3MzM2Nzg0'},
+{ text: 'GEO & RAY OPTICS', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTk0MTk4MTgwNTkyMTUyLTIyMTk1MjAwNjczODQ3NTIw'},
+{ text: 'String Waves', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMTk2MjAzMTY3MTAyODg4LTIyMjA0MjIzMTEzMTQ1ODMy'},
+{ text: 'Sound Waves', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjA1MjI1NjA2NDAxMjAwLTIyMjA2MjI4MDk5NjU2NTY4'},
+{ text: 'Wave Optics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjA3MjMwNTkyOTExOTM2LTIyMjA4MjMzMDg2MTY3MzA0'},
+{ text: 'Modern Physics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjA5MjM1NTc5NDIyNjcyLTIyMjIxMjY1NDk4NDg3MDg4'},
+{ text: 'Semiconductor', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjIyMjY3OTkxNzQyNDU2LTIyMjI4MjgyOTUxMjc0NjY0'}
+                ]
+            },{
+                text: 'NMS Sir Enthuse Physics (Zoom)',
+                subcards: [
+                    { text: 'NMS Sir Enthuse Physics (Zoom) ', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjI5Mjg1NDQ0NTMwMDMyLTIyMjM3MzA1MzkwNTcyOTc2'}
+                ]
+            },{
+                text: 'Gaurav Talwar Enthuse Maths',
+                subcards: [
+                    { text: 'Functions', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjUxMzQwMjk2MTQ4MTI4LTIyMjUyMzQyNzg5NDAzNDk2'},
+{ text: 'ITF', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjUzMzQ1MjgyNjU4ODY0LTIyMjU0MzQ3Nzc1OTE0MjMy'},
+{ text: 'Limits', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjU1MzUwMjY5MTY5NjAwLTIyMjU2MzUyNzYyNDI0OTY4'},
+{ text: 'Continuity & Differentiability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjU3MzU1MjU1NjgwMzM2LTIyMjU4MzU3NzQ4OTM1NzA0'},
+{ text: 'MOD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjU5MzYwMjQyMTkxMDcyLTIyMjYwMzYyNzM1NDQ2NDQw'},
+{ text: 'Indefinite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjYxMzY1MjI4NzAxODA4LTIyMjYyMzY3NzIxOTU3MTc2'},
+{ text: 'Definite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjYzMzcwMjE1MjEyNTQ0LTIyMjY0MzcyNzA4NDY3OTEy'},
+{ text: 'Area Under Curve', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjY1Mzc1MjAxNzIzMjgwLTIyMjY2Mzc3Njk0OTc4NjQ4'},
+{ text: 'Differential Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjY3MzgwMTg4MjM0MDE2LTIyMjY4MzgyNjgxNDg5Mzg0'},
+{ text: 'Matrices', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjY5Mzg1MTc0NzQ0NzUyLTIyMjcwMzg3NjY4MDAwMTIw'},
+{ text: 'Vectors', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjcxMzkwMTYxMjU1NDg4LTIyMjcyMzkyNjU0NTEwODU2'},
+{ text: 'Conic Section', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjczMzk1MTQ3NzY2MjI0LTIyMjc0Mzk3NjQxMDIxNTky'},
+{ text: 'AOD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjc1NDAwMTM0Mjc2OTYwLTIyMjc2NDAyNjI3NTMyMzI4'},
+{ text: 'Complex Number', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjc3NDA1MTIwNzg3Njk2LTIyMjc4NDA3NjE0MDQzMDY0'},
+{ text: 'Probability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjc5NDEwMTA3Mjk4NDMyLTIyMjgwNDEyNjAwNTUzODAw'}
+                ]
+            },
+            ]
+    },
+    {
+        text: '𝗟𝗨𝗟𝗟𝗔𝗡 𝗟𝗲𝗰𝘁𝘂𝗿𝗲𝘀 𝟮',
+        secondcards: [
+            {
+                text: 'Amit Gupta Enthuse Physical',
+                subcards: [
+                    { text: 'Solid State', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjg1NDI1MDY2ODMwNjQwLTIyMjg2NDI3NTYwMDg2MDA4'},
+{ text: 'Liquid Solution', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjg3NDMwMDUzMzQxMzc2LTIyMjg4NDMyNTQ2NTk2NzQ0'},
+{ text: 'Chemical Kinetics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjg5NDM1MDM5ODUyMTEyLTIyMjkwNDM3NTMzMTA3NDgw'},
+{ text: 'Nuclear Chemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjkxNDQwMDI2MzYyODQ4LTIyMjkyNDQyNTE5NjE4MjE2'},
+{ text: 'Thermodynamics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjkzNDQ1MDEyODczNTg0LTIyMjk0NDQ3NTA2MTI4OTUy'},
+{ text: 'Ionic Equilibrium', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjk1NDQ5OTk5Mzg0MzIwLTIyMjk2NDUyNDkyNjM5Njg4'},
+{ text: 'Electrochemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjk3NDU0OTg1ODk1MDU2LTIyMjk4NDU3NDc5MTUwNDI0'},
+{ text: 'Radioactivity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMjk5NDU5OTcyNDA1NzkyLTIyMzAwNDYyNDY1NjYxMTYw'},
+{ text: 'Surface Chemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyMzAxNDY0OTU4OTE2NTI4LTIyNDE0NzQ2Njk2NzczMTEy'}
+    ]
+            },
+            {
+                text: 'Pratul Singhal Inorganic Enthuse',
+                subcards: [
+                    { text: 'Chemical Bonding Part 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDE1NzQ5MTkwMDI4NDgwLTIyNDE2NzUxNjgzMjgzODQ4'},
+{ text: 'Chemical Bonding Part 2 II', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDE3NzU0MTc2NTM5MjE2LTIyNDE4NzU2NjY5Nzk0NTg0'},
+{ text: 'Coordination Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDE5NzU5MTYzMDQ5OTUyLTIyNDIwNzYxNjU2MzA1MzIw'},
+{ text: 'Coordination Compounds Sanjay Sodhani', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDIxNzY0MTQ5NTYwNjg4LTIyNDIyNzY2NjQyODE2MDU2'},
+{ text: 'S bLock', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDIzNzY5MTM2MDcxNDI0LTIyNDI2Nzc2NjE1ODM3NTI4'},
+{ text: 'PDF Block & Hydrogen', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDI3Nzc5MTA5MDkyODk2LTIyNDI3Nzc5MTA5MDkyODk2'},
+{ text: 'Salt Analysis', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDI4NzgxNjAyMzQ4MjY0LTIyNDI5Nzg0MDk1NjAzNjMy'},
+{ text: 'Metallurgy', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDMwNzg2NTg4ODU5MDAwLTIyNDMxNzg5MDgyMTE0MzY4'}
+                ]
+            },
+            {
+                text: 'Sandeep Sethia Organic Enthuse',
+                subcards: [
+                    { text: 'Sandeep Sethia Organic Enthuse', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDMyNzkxNTc1MzY5NzM2LTIyNDM0Nzk2NTYxODgwNDcy'}
+                ]
+            },
+            {
+                text: 'Ram Ashish Paul Organic Enthuse',
+                subcards: [
+                    { text: 'Ram Ashish Paul Organic Enthuse ', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDM1Nzk5MDU1MTM1ODQwLTIyNDM2ODAxNTQ4MzkxMjA4'},
+{ text: 'Reaction Mechanism', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyNDM3ODA0MDQxNjQ2NTc2LTIyNDM5ODA5MDI4MTU3MzEy'}
+                ]
+            },
+            {
+                text: 'Physics WhiteBoard',
+                subcards: [
+                    { text: 'DPP Video Solution', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM3ODUyMTQwMzM2MTg0OTQ0LTM3ODYwMTYwMjgyMjI3ODg4' },
+{ text: 'Solid State', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM3ODYxMTYyNzc1NDgzMjU2LTM3ODg0MjIwMTIwMzU2NzIw' },
+{ text: 'Thermodynamics', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM3ODg1MjIyNjEzNjEyMDg4LTM3OTMzMzQyMjg5ODY5NzUy' },
+{ text: 'Thermochemistry', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM3OTM0MzQ0NzgzMTI1MTIwLTM3OTQ3Mzc3MTk1NDQ0OTA0' },
+{ text: 'Chemical Kinetics', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM3OTQ4Mzc5Njg4NzAwMjcyLTM4MDE2NTQ5MjMwMDY1Mjk2' },
+{ text: 'Electrochemistry', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM4MDE3NTUxNzIzMzIwNjY0LTM4MDQ1NjIxNTM0NDcwOTY4' },
+{ text: 'Liquid Solution', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM4MDQ2NjI0MDI3NzI2MzM2LTM3OTgwNDU5NDcyODcyMDQ4' },
+{ text: 'Ionic Equilibrium', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM3OTgxNDYxOTY2MTI3NDE2LTM4MDcxNjg2MzU5MTEwNTM2' },
+{ text: 'Revision Plan', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM4MDcyNjg4ODUyMzY1OTA0LTM4MTAzNzY2MTQzMjgyMzEy' },
+{ text: 'Surface Chemistry', url: 'https://opmasterweb.github.io/servers/?token=Z2V0LTM4MTA0NzY4NjM2NTM3NjgwLTM4MTEyNzg4NTgyNTgwNjI0' }
+                 ]
+              },
+            {
+                text: 'Chemistry WhiteBoard',
+                subcards: [
+                    { text: 'Mole concept', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyOTU2MDkzMDU0NjcxODMyLTIyOTY1MTE1NDkzOTcwMTQ0'},
+{ text: 'Chemical Equilibrium ', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyOTY2MTE3OTg3MjI1NTEyLTIyOTcyMTMyOTQ2NzU3NzIw'},
+{ text: 'Redox', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyOTczMTM1NDQwMDEzMDg4LTIyOTkyMTgyODExODY1MDgw'},
+{ text: 'Ideal Gas', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIyOTkzMTg1MzA1MTIwNDQ4LTIzMDA0MjEyNzMwOTI5NDk2'},
+{ text: 'Periodic Table', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMDA1MjE1MjI0MTg0ODY0LTIzMDIxMjU1MTE2MjcwNzUy'},
+{ text: 'IUPAC Nomenclature', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMDIyMjU3NjA5NTI2MTIwLTIzMDQ2MzE3NDQ3NjU0OTUy'},
+{ text: 'Isomerism', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMDQ3MzE5OTQwOTEwMzIwLTIzMDgxNDA0NzExNTkyODMy'},
+{ text: 'GOC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMDgyNDA3MjA0ODQ4MjAwLTIzMDk4NDQ3MDk2OTM0MDg4'},
+{ text: 'Concentration Terms', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMDk5NDQ5NTkwMTg5NDU2LTIzMTA4NDcyMDI5NDg3NzY4'},
+{ text: 'Atomic Structure', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMTA5NDc0NTIyNzQzMTM2LTIzMTIzNTA5NDI4MzE4Mjg4'},
+{ text: 'Real Gas', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMTI0NTExOTIxNTczNjU2LTIzMTMyNTMxODY3NjE2NjAw'},
+{ text: 'Ionic Equilibrium', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMTMzNTM0MzYwODcxOTY4LTIzMTY0NjExNjUxNzg4Mzc2'},
+{ text: 'Electrochemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMTY1NjE0MTQ1MDQzNzQ0LTIzMTc5NjQ5MDUwNjE4ODk2'},
+{ text: 'Thermodynamics P1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMTgwNjUxNTQzODc0MjY0LTIzMTk3NjkzOTI5MjE1NTIw'},
+{ text: 'Thermodynamics P2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMTk4Njk2NDIyNDcwODg4LTIzMjA3NzE4ODYxNzY5MjAw'},
+{ text: 'Chemical Kinetics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjA4NzIxMzU1MDI0NTY4LTIzMjIxNzUzNzY3MzQ0MzUy'},
+{ text: 'Thermochemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjIyNzU2MjYwNTk5NzIwLTIzMjMwNzc2MjA2NjQyNjY0'},
+{ text: 'Surface Chemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjMxNzc4Njk5ODk4MDMyLTIzMjM5Nzk4NjQ1OTQwOTc2'},
+{ text: 'Hydrocarbon', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjQwODAxMTM5MTk2MzQ0LTIzMjczODgzNDE2NjIzNDg4'},
+{ text: 'Haloalkanes', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjc0ODg1OTA5ODc4ODU2LTIzMjgxOTAzMzYyNjY2NDMy'},
+{ text: 'Alcohol', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjgyOTA1ODU1OTIxODAwLTIzMjkwOTI1ODAxOTY0NzQ0'},
+{ text: 'Carbonyl Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjkxOTI4Mjk1MjIwMTEyLTIzMjk3OTQzMjU0NzUyMzIw'},
+{ text: 'Carboxylic Acid', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMjk4OTQ1NzQ4MDA3Njg4LTIzMjk5OTQ4MjQxMjYzMDU2'},
+{ text: 'Amines', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzAwOTUwNzM0NTE4NDI0LTIzMzAyOTU1NzIxMDI5MTYw'},
+{ text: 'POC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzAzOTU4MjE0Mjg0NTI4LTIzMzAzOTU4MjE0Mjg0NTI4'},
+{ text: 'Biomolecules & Polymers', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzA0OTYwNzA3NTM5ODk2LTIzMzA4OTcwNjgwNTYxMzY4'},
+{ text: 'Coordination Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzA5OTczMTczODE2NzM2LTIzMzMxMDI1NTMyMTc5NDY0'},
+{ text: 'Salt Analysis', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzMyMDI4MDI1NDM0ODMyLTIzMzY4MTE3NzgyNjI4MDgw'},
+{ text: 'Metallurgy', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzY5MTIwMjc1ODgzNDQ4LTIzMzk0MTgyNjA3MjY3NjQ4'},
+{ text: 'Solid State', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzMzk1MTg1MTAwNTIzMDE2LTIzNDA5MjIwMDA2MDk4MTY4'},
+{ text: 'Aromatic Compound', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDEwMjIyNDk5MzUzNTM2LTIzNDI2MjYyMzkxNDM5NDI0'},
+{ text: 'Carbonyl Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDI3MjY0ODg0Njk0NzkyLTIzNDM0MjgyMzM3NDgyMzY4'},
+{ text: 'Carboxylic Acid', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDM1Mjg0ODMwNzM3NzM2LTIzNDQ1MzA5NzYzMjkxNDE2'},
+{ text: 'Chemistry in Everyday Life', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDQ2MzEyMjU2NTQ2Nzg0LTIzNDQ3MzE0NzQ5ODAyMTUy'},
+{ text: 'S Block', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDQ4MzE3MjQzMDU3NTIwLTIzNDUxMzI0NzIyODIzNjI0'},
+{ text: 'P Block', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDUyMzI3MjE2MDc4OTkyLTIzNDU4MzQyMTc1NjExMjAw'},
+{ text: 'DF Block', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDU5MzQ0NjY4ODY2NTY4LTIzNDY0MzU3MTM1MTQzNDA4'},
+{ text: 'Chemical Bonding', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDY1MzU5NjI4Mzk4Nzc2LTIzNDg1NDA5NDkzNTA2MTM2'}
+                ]
+              },{
+                text: 'Maths Whiteboard',
+                subcards: [
+                    { text: 'Basic Maths', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDg5NDE5NDY2NTI3NjA4LTIzNDkzNDI5NDM5NTQ5MDgw'},
+{ text: 'Quadratic Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNDk0NDMxOTMyODA0NDQ4LTIzNTA5NDY5MzMxNjM0OTY4'},
+{ text: 'Sequence Series', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNTEwNDcxODI0ODkwMzM2LTIzNTM0NTMxNjYzMDE5MTY4'},
+{ text: 'Trigonometry Equation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNTM1NTM0MTU2Mjc0NTM2LTIzNTQ0NTU2NTk1NTcyODQ4'},
+{ text: 'Straight Lines', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNTQ1NTU5MDg4ODI4MjE2LTIzNTYzNjAzOTY3NDI0ODQw'},
+{ text: 'Circle', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNTY0NjA2NDYwNjgwMjA4LTIzNTgzNjUzODMyNTMyMjAw'},
+{ text: 'Permutations Combination', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNTg0NjU2MzI1Nzg3NTY4LTIzNjA3NzEzNjcwNjYxMDMy'},
+{ text: 'Binomial Theorem', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjA4NzE2MTYzOTE2NDAwLTIzNjIxNzQ4NTc2MjM2MTg0'},
+{ text: 'Determinants', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjIyNzUxMDY5NDkxNTUyLTIzNjMyNzc2MDAyMDQ1MjMy'},
+{ text: 'SOT', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjMzNzc4NDk1MzAwNjAwLTIzNjUyODI1ODY3MTUyNTky'},
+{ text: 'Conic Section', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjUzODI4MzYwNDA3OTYwLTIzNjc2ODg1NzA1MjgxNDI0'},
+{ text: 'Matrices', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjc3ODg4MTk4NTM2NzkyLTIzNjg2OTEwNjM3ODM1MTA0'},
+{ text: 'Complex Number', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjg3OTEzMTMxMDkwNDcyLTIzNjk0OTMwNTgzODc4MDQ4'},
+{ text: 'ITF', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNjk1OTMzMDc3MTMzNDE2LTIzNzAzOTUzMDIzMTc2MzYw'},
+{ text: 'Statistics ', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzA0OTU1NTE2NDMxNzI4LTIzNzExOTcyOTY5MjE5MzA0'},
+{ text: 'Functions', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzEyOTc1NDYyNDc0NjcyLTIzNzMyMDIyODM0MzI2NjY0'},
+{ text: 'Continuity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzMzMDI1MzI3NTgyMDMyLTIzNzM3MDM1MzAwNjAzNTA0'},
+{ text: 'Differentiability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzM4MDM3NzkzODU4ODcyLTIzNzQ1MDU1MjQ2NjQ2NDQ4'},
+{ text: 'MOD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzQ2MDU3NzM5OTAxODE2LTIzNzU5MDkwMTUyMjIxNjAw'},
+{ text: 'Limits', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzYwMDkyNjQ1NDc2OTY4LTIzNzgwMTQyNTEwNTg0MzI4'},
+{ text: 'AOD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzNzgxMTQ1MDAzODM5Njk2LTIzODAyMTk3MzYyMjAyNDI0'},
+{ text: 'Indefinite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODAzMTk5ODU1NDU3NzkyLTIzODE3MjM0NzYxMDMyOTQ0'},
+{ text: 'Definite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODE4MjM3MjU0Mjg4MzEyLTIzODMzMjc0NjUzMTE4ODMy'},
+{ text: 'Area Under Curve', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODM0Mjc3MTQ2Mzc0MjAwLTIzODQxMjk0NTk5MTYxNzc2'},
+{ text: 'Differential Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODQyMjk3MDkyNDE3MTQ0LTIzODQ5MzE0NTQ1MjA0NzIw'},
+{ text: 'Vector', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODUwMzE3MDM4NDYwMDg4LTIzODU4MzM2OTg0NTAzMDMy'},
+{ text: '3D Geometry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODU5MzM5NDc3NzU4NDAwLTIzODY3MzU5NDIzODAxMzQ0'},
+{ text: 'Probability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODY4MzYxOTE3MDU2NzEyLTIzODc5Mzg5MzQyODY1NzYw'},
+{ text: 'Mathematical Reasoning', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODgwMzkxODM2MTIxMTI4LTIzODgzMzk5MzE1ODg3MjMy'},
+{ text: 'Trigonometry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODg0NDAxODA5MTQyNjAwLTIzODg5NDE0Mjc1NDE5NDQw'},
+{ text: 'Height & Distance', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzODkwNDE2NzY4Njc0ODA4LTIzODkwNDE2NzY4Njc0ODA4'}                   
+                ]
+            },{
+                text: 'Rahul Yadav Physics Enthuse',
+                subcards: [
+                    { text: 'Rahul Yadav Physics Enthuse', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzOTE2NDgxNTkzMzE0Mzc2LTIzOTE5NDg5MDczMDgwNDgw'}
+                ]
+            },{
+                text: 'Mohit Bhargav TOPS',
+                subcards: [
+                    { text: 'Nurture Part 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTIzOTIxNDk0MDU5NTkxMjE2LTI0MDIxNzQzMzg1MTI4MDE2'},
+{ text: 'Nurture Part 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MDIyNzQ1ODc4MzgzMzg0LTI0MDYxODQzMTE1MzQyNzM2'}
+                ]
+            },{
+                text: 'Mohit Bhargav Enthuse ( Some Chapters )',
+                subcards: [
+                    { text: 'EMI', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MDYzODQ4MTAxODUzNDcyLTI0MDc0ODc1NTI3NjYyNTIw'},
+{ text: 'AC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MDc1ODc4MDIwOTE3ODg4LTI0MDc5ODg3OTkzOTM5MzYw'},
+{ text: 'Magnetism & Matter', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MDgwODkwNDg3MTk0NzI4LTI0MDg0OTAwNDYwMjE2MjAw'},
+{ text: 'Fluid Mechanics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MDg1OTAyOTUzNDcxNTY4LTI0MDk5OTM3ODU5MDQ2NzIw'},
+{ text: 'Gravitation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MTAwOTQwMzUyMzAyMDg4LTI0MTAzOTQ3ODMyMDY4MTky'},
+{ text: 'Magnetism', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MTA0OTUwMzI1MzIzNTYwLTI0MTEzOTcyNzY0NjIxODcy'}
+                ]
+             },
+            {
+                text: 'Sudharshan Guha IOC',
+                subcards: [
+                    { text: 'Sudharshan Guha IOC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3OTU0NTI0NDI1OTM2NjgwLTI4MDUzNzcxMjU4MjE4MTEy'}
+                ]
+            },{
+                text: 'Physics Revision by RY & NMS Sir',
+                subcards: [
+                    { text: 'Physics Revision by RY & NMS Sir', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MDU0NzczNzUxNDczNDgwLTI4MDkwODYzNTA4NjY2NzI4'}
+                ]
+            },{
+                text: 'Arvind Tiwari Nurture Physics',
+                subcards: [
+                    { text: 'Basic Maths', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MDkxODY2MDAxOTIyMDk2LTI4MDk4ODgzNDU0NzA5Njcy'},
+{ text: 'Circular Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MDk5ODg1OTQ3OTY1MDQwLTI4MTA1OTAwOTA3NDk3MjQ4'},
+{ text: 'Relative Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTA2OTAzNDAwNzUyNjE2LTI4MTEwOTEzMzczNzc0MDg4'},
+{ text: 'Constraint Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTExOTE1ODY3MDI5NDU2LTI4MTE1OTI1ODQwMDUwOTI4'},
+{ text: 'NLM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTE2OTI4MzMzMzA2Mjk2LTI4MTI1OTUwNzcyNjA0NjA4'},
+{ text: 'Friction', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTI2OTUzMjY1ODU5OTc2LTI4MTMxOTY1NzMyMTM2ODE2'},
+{ text: 'COM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTMyOTY4MjI1MzkyMTg0LTI4MTQxOTkwNjY0NjkwNDk2'},
+{ text: 'WPE', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTQyOTkzMTU3OTQ1ODY0LTI4MTQ5MDA4MTE3NDc4MDcy'},
+{ text: 'Rotation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTUwMDEwNjEwNzMzNDQwLTI4MTUyMDE1NTk3MjQ0MTc2'}
+                ]
+            },{
+                text: 'Rahul Yadav Krotov Solution',
+                subcards: [
+                    { text: 'Rahul Yadav Krotov Solution', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI4MTUzMDE4MDkwNDk5NTQ0LTI4MTcyMDY1NDYyMzUxNTM2'}
+                ]
+            }
+            ]
+    },
+    {
+        text: '𝗟𝗨𝗟𝗟𝗔𝗡 𝗟𝗲𝗰𝘁𝘂𝗿𝗲𝘀 𝟯',
+        secondcards: [
+            {
+                text: 'Vaibhav Jhanwar Physics',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MTE0OTc1MjU3ODc3MjQwLTI0MTcyMTE3MzczNDMzMjE2'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MTczMTE5ODY2Njg4NTg0LTI0MjI4MjU2OTk1NzMzODI0'}
+                ]
+            },
+            {
+                text: 'JJ Sir Nurture Maths (Zoom)',
+                subcards: [
+                    { text: 'JJ Sir Nurture Maths (Zoom)', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MjMwMjYxOTgyMjQ0NTYwLTI0MjQ2MzAxODc0MzMwNDQ4'}
+                ]
+            },
+            {
+                text: 'SKV Enthuse Maths',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MjQ3MzA0MzY3NTg1ODE2LTI0Mjg3NDA0MDk3ODAwNTM2'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0Mjg4NDA2NTkxMDU1OTA0LTI0MzM3NTI4NzYwNTY4OTM2'},
+{ text: 'PART 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0MzM4NTMxMjUzODI0MzA0LTI0Mzg4NjU1OTE2NTkyNzA0'},
+{ text: 'PART 4', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0Mzg5NjU4NDA5ODQ4MDcyLTI0NDQzNzkzMDQ1NjM3OTQ0'}
+                ]
+            },
+            {
+                text: 'ABT & Gaurav Talwar Enthuse Maths',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NDQ0Nzk1NTM4ODkzMzEyLTI0NDkzOTE3NzA4NDA2MzQ0'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NDk0OTIwMjAxNjYxNzEyLTI0NTQ1MDQ0ODY0NDMwMTEy'},
+{ text: 'PART 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NTQ2MDQ3MzU3Njg1NDgwLTI0NjA4MjAxOTM5NTE4Mjk2'}
+                ]
+            },
+            {
+                text: 'Suyash Pratap Singh Maths Leader',
+                subcards: [
+                    { text: 'Function', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjExMjA5NDE5Mjg0NDAwLTI0NjE4MjI2ODcyMDcxOTc2'},
+{ text: 'ITF', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjE5MjI5MzY1MzI3MzQ0LTI0NjIzMjM5MzM4MzQ4ODE2'},
+{ text: 'Limits', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjI0MjQxODMxNjA0MTg0LTI0NjMwMjU2NzkxMTM2Mzky'},
+{ text: 'Continuity & Differentiability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjMxMjU5Mjg0MzkxNzYwLTI0NjM4Mjc2NzM3MTc5MzM2'},
+{ text: 'Indefinite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjM5Mjc5MjMwNDM0NzA0LTI0NjQ1Mjk0MTg5OTY2OTEy'},
+{ text: 'Definite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjQ2Mjk2NjgzMjIyMjgwLTI0NjUyMzExNjQyNzU0NDg4'},
+{ text: 'AOD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjUzMzE0MTM2MDA5ODU2LTI0NjYyMzM2NTc1MzA4MTY4'},
+{ text: 'Area Under Curve', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjYzMzM5MDY4NTYzNTM2LTI0NjcwMzU2NTIxMzUxMTEy'},
+{ text: 'Matrices & Determinants', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NjcxMzU5MDE0NjA2NDgwLTI0Njc4Mzc2NDY3Mzk0MDU2'},
+{ text: 'Vectors & 3D Geometry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0Njc5Mzc4OTYwNjQ5NDI0LTI0Njg4NDAxMzk5OTQ3NzM2'},
+{ text: 'Binomial Theorem', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0Njg5NDAzODkzMjAzMTA0LTI0Njk0NDE2MzU5NDc5OTQ0'},
+{ text: 'Complex Number', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0Njk1NDE4ODUyNzM1MzEyLTI0NzAxNDMzODEyMjY3NTIw'},
+{ text: 'Straight Lines', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzAyNDM2MzA1NTIyODg4LTI0NzA3NDQ4NzcxNzk5NzI4'},
+{ text: 'Circle', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzA4NDUxMjY1MDU1MDk2LTI0NzEzNDYzNzMxMzMxOTM2'},
+{ text: 'Conic Section', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzE0NDY2MjI0NTg3MzA0LTI0NzIzNDg4NjYzODg1NjE2'},
+{ text: 'Sequence Series', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzI0NDkxMTU3MTQwOTg0LTI0NzMwNTA2MTE2NjczMTky'},
+{ text: 'Quadratic Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzMxNTA4NjA5OTI4NTYwLTI0NzM5NTI4NTU1OTcxNTA0'},
+{ text: 'Height & Distance', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzQwNTMxMDQ5MjI2ODcyLTI0NzQxNTMzNTQyNDgyMjQw'},
+{ text: 'Permutations & Combination', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzQyNTM2MDM1NzM3NjA4LTI0NzQ5NTUzNDg4NTI1MTg0'},
+{ text: 'SOT', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzUwNTU1OTgxNzgwNTUyLTI0NzUzNTYzNDYxNTQ2NjU2'},
+{ text: 'Revision Booster', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzU0NTY1OTU0ODAyMDI0LTI0NzcwNjA1ODQ2ODg3OTEy'}
+                ]
+              },
+            {
+                text: 'Saleem Sir Nurture',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0NzcyNjEwODMzMzk4NjQ4LTI0ODIyNzM1NDk2MTY3MDQ4'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0ODIzNzM3OTg5NDIyNDE2LTI0ODcyODYwMTU4OTM1NDQ4'},
+{ text: 'PART 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0ODczODYyNjUyMTkwODE2LTI0OTI4OTk5NzgxMjM2MDU2'}
+                ]
+              },{
+                text: 'Kapil Wadhwa Inorganic Leader',
+                subcards: [
+                    { text: 'Kapil Wadhwa Inorganic Leader', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI0OTMwMDAyMjc0NDkxNDI0LTI1MDE2MjE2Njk0NDUzMDcy'}
+                ]
+            },{
+                text: 'Rahul Mishra Enthuse Physical',
+                subcards: [
+    { text: 'Rahul Mishra Enthuse Physical', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MDE3MjE5MTg3NzA4NDQwLTI1MjE0NzEwMzU5MDE1OTM2'}
+                ]
+            },{
+                text: 'Sonal Rajora Organic',
+                subcards: [
+                    { text: 'Sonal Rajora Organic', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MjE1NzEyODUyMjcxMzA0LTI1Mjc4ODY5OTI3MzU5NDg4'}
+                ]
+            },{
+                text: 'Vimal Kumar Enthuse Physical (Zoom)',
+                subcards: [
+                    { text: 'Vimal Kumar Enthuse Physical (Zoom)', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Mjc4ODY5OTI3MzU5NDg4LTI1MjgwODc0OTEzODcwMjI0'}
+                ]
+            },{
+                text: 'Vimal Kumar Enthuse IOC (zoom)',
+                subcards: [
+                    { text: 'Vimal Kumar Enthuse IOC (zoom)', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MjgxODc3NDA3MTI1NTkyLTI1Mjg0ODg0ODg2ODkxNjk2'}
+                ]
+            },{
+                text: 'Sachin Singh Dropper Physics (Zoom)',
+                subcards: [
+                    { text: 'Sachin Singh Dropper Physics (Zoom)', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Mjg1ODg3MzgwMTQ3MDY0LTI1Mjg4ODk0ODU5OTEzMTY4'}
+                ]
+            },{
+                text: 'Enthuse Physics by Siddharth Sir',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzY2MDgxNjQ5NDY4MzM2LTI1ODI2MjMxMjQ0NzkwNDE2'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1ODI3MjMzNzM4MDQ1Nzg0LTI1ODg3MzgzMzMzMzY3ODY0'},
+{ text: 'PART 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1ODg4Mzg1ODI2NjIzMjMyLTI1OTM4NTEwNDg5MzkxNjMy'},
+{ text: 'PART 4', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1OTM5NTEyOTgyNjQ3MDAwLTI1OTc5NjEyNzEyODYxNzIw'}
+                ]
+            },
+            ]
+    },
+    {
+        text: '𝗟𝗨𝗟𝗟𝗔𝗡 𝗟𝗲𝗰𝘁𝘂𝗿𝗲𝘀 𝟰',
+        secondcards: [
+            {
+                text: 'Physics Crash Course',
+                subcards: [
+                    { text: 'Electrostatics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MjkyOTA0ODMyOTM0NjQwLTI1MzAyOTI5NzY1NDg4MzIw'},
+{ text: 'Current Electricity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzAzOTMyMjU4NzQzNjg4LTI1MzExOTUyMjA0Nzg2NjMy'},
+{ text: 'Capacitor', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzEyOTU0Njk4MDQyMDAwLTI1MzE5OTcyMTUwODI5NTc2'},
+{ text: 'Magnetism Effect of Current', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzIwOTc0NjQ0MDg0OTQ0LTI1MzI1OTg3MTEwMzYxNzg0'},
+{ text: 'Magnetism & Matter', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzI2OTg5NjAzNjE3MTUyLTI1MzI4OTk0NTkwMTI3ODg4'},
+{ text: 'EMI', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzI5OTk3MDgzMzgzMjU2LTI1MzMzMDA0NTYzMTQ5MzYw'},
+{ text: 'AC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzM0MDA3MDU2NDA0NzI4LTI1MzM5MDE5NTIyNjgxNTY4'},
+{ text: 'Vectors', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzQwMDIyMDE1OTM2OTM2LTI1MzQ2MDM2OTc1NDY5MTQ0'},
+{ text: 'Kinematics 1D', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzQ3MDM5NDY4NzI0NTEyLTI1MzU1MDU5NDE0NzY3NDU2'},
+{ text: 'Kinematics 2D', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzU2MDYxOTA4MDIyODI0LTI1MzU5MDY5Mzg3Nzg4OTI4'},
+{ text: 'NLM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzYwMDcxODgxMDQ0Mjk2LTI1MzYzMDc5MzYwODEwNDAw'},
+{ text: 'Circular Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzY0MDgxODU0MDY1NzY4LTI1MzY3MDg5MzMzODMxODcy'},
+{ text: 'Work Power Energy', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzY4MDkxODI3MDg3MjQwLTI1Mzc1MTA5Mjc5ODc0ODE2'},
+{ text: 'Rotational Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Mzc2MTExNzczMTMwMTg0LTI1MzgwMTIxNzQ2MTUxNjU2'},
+{ text: 'Gravitation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzgxMTI0MjM5NDA3MDI0LTI1MzgyMTI2NzMyNjYyMzky'},
+{ text: 'SHM', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzgzMTI5MjI1OTE3NzYwLTI1Mzg1MTM0MjEyNDI4NDk2'},
+{ text: 'Surface Tension & Elasticity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Mzg2MTM2NzA1NjgzODY0LTI1Mzg3MTM5MTk4OTM5MjMy'},
+{ text: 'KTG', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Mzg4MTQxNjkyMTk0NjAwLTI1MzkxMTQ5MTcxOTYwNzA0'},
+{ text: 'Fluid Mechanics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzkyMTUxNjY1MjE2MDcyLTI1MzkyMTUxNjY1MjE2MDcy'},
+{ text: 'Ray Optics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1MzkzMTU0MTU4NDcxNDQwLTI1NDEzMjA0MDIzNTc4ODAw'},
+{ text: 'Wave Optics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDE0MjA2NTE2ODM0MTY4LTI1NDI1MjMzOTQyNjQzMjE2'},
+{ text: 'Wave Motion', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDI2MjM2NDM1ODk4NTg0LTI1NDMyMjUxMzk1NDMwNzky'},
+{ text: 'Sound Wave', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDMzMjUzODg4Njg2MTYwLTI1NDQyMjc2MzI3OTg0NDcy'},
+{ text: 'Matter Waves', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDQzMjc4ODIxMjM5ODQwLTI1NDQ3Mjg4Nzk0MjYxMzEy'},
+{ text: 'Nuclear Physics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDQ4MjkxMjg3NTE2NjgwLTI1NDUxMjk4NzY3MjgyNzg0'},
+{ text: 'Radioactivity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDUyMzAxMjYwNTM4MTUyLTI1NDU2MzExMjMzNTU5NjI0'},
+{ text: 'Photo Electric Effect', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDU3MzEzNzI2ODE0OTkyLTI1NDYxMzIzNjk5ODM2NDY0'},
+{ text: 'Semiconductor', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDYyMzI2MTkzMDkxODMyLTI1NDY4MzQxMTUyNjI0MDQw'},
+{ text: 'Communication', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDY5MzQzNjQ1ODc5NDA4LTI1NDc4MzY2MDg1MTc3NzIw'}
+                ]
+            },{
+                text: 'Physical Chemistry',
+                subcards: [
+                    { text: 'Atomic Structure', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDc5MzY4NTc4NDMzMDg4LTI1NDg4MzkxMDE3NzMxNDAw'},
+{ text: 'Chemical Kinetics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDg5MzkzNTEwOTg2NzY4LTI1NDkzNDAzNDg0MDA4MjQw'},
+{ text: 'Chemical Equilibrium', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDk0NDA1OTc3MjYzNjA4LTI1NDk3NDEzNDU3MDI5NzEy'},
+{ text: 'Redox', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NDk4NDE1OTUwMjg1MDgwLTI1NTAwNDIwOTM2Nzk1ODE2'},
+{ text: 'Electrochemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTAxNDIzNDMwMDUxMTg0LTI1NTA1NDMzNDAzMDcyNjU2'},
+{ text: 'Solution', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTA2NDM1ODk2MzI4MDI0LTI1NTA5NDQzMzc2MDk0MTI4'},
+{ text: 'Solid State', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTEwNDQ1ODY5MzQ5NDk2LTI1NTEzNDUzMzQ5MTE1NjAw'},
+{ text: 'Thermodynamics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTE0NDU1ODQyMzcwOTY4LTI1NTE2NDYwODI4ODgxNzA0'},
+{ text: 'Ionic Equilibrium', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTE3NDYzMzIyMTM3MDcyLTI1NTE5NDY4MzA4NjQ3ODA4'},
+{ text: 'Mole Concept & Real Gas', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTIwNDcwODAxOTAzMTc2LTI1NTIyNDc1Nzg4NDEzOTEy'},
+{ text: 'Surface Chemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTIzNDc4MjgxNjY5MjgwLTI1NTI4NDkwNzQ3OTQ2MTIw'}
+                ]
+                   },
+            {
+                text: 'Inorganic Chemistry',
+                subcards: [
+                    { text: 'Periodic Property', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTI5NDkzMjQxMjAxNDg4LTI1NTM5NTE4MTczNzU1MTY4'},
+{ text: 'Chemical Bonding', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTQwNTIwNjY3MDEwNTM2LTI1NTU3NTYzMDUyMzUxNzky'},
+{ text: 'Coordination Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTU4NTY1NTQ1NjA3MTYwLTI1NTY1NTgyOTk4Mzk0NzM2'},
+{ text: 'P Block', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTY2NTg1NDkxNjUwMTA0LTI1NTcwNTk1NDY0NjcxNTc2'},
+{ text: 'DF Block', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTcxNTk3OTU3OTI2OTQ0LTI1NTczNjAyOTQ0NDM3Njgw'},
+{ text: 'Metallurgy', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTc0NjA1NDM3NjkzMDQ4LTI1NTc1NjA3OTMwOTQ4NDE2'},
+{ text: 'S Block & Hydrogen', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTc2NjEwNDI0MjAzNzg0LTI1NTgxNjIyODkwNDgwNjI0'}
+                ]
+            },
+            {
+                text: 'Organic Chemistry',
+                subcards: [
+                    { text: 'Iupac', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTgyNjI1MzgzNzM1OTkyLTI1NTg1NjMyODYzNTAyMDk2'},
+{ text: 'Isomerism', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTg2NjM1MzU2NzU3NDY0LTI1NTkxNjQ3ODIzMDM0MzA0'},
+{ text: 'GOC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTkyNjUwMzE2Mjg5NjcyLTI1NTk4NjY1Mjc1ODIxODgw'},
+{ text: 'Hydrocarbon', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NTk5NjY3NzY5MDc3MjQ4LTI1NjA5NjkyNzAxNjMwOTI4'},
+{ text: 'Alcohol Ether', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjEwNjk1MTk0ODg2Mjk2LTI1NjEzNzAyNjc0NjUyNDAw'},
+{ text: 'Carbonyl Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjE0NzA1MTY3OTA3NzY4LTI1NjE2NzEwMTU0NDE4NTA0'},
+{ text: 'Nitrogen', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjE3NzEyNjQ3NjczODcyLTI1NjE4NzE1MTQwOTI5MjQw'},
+{ text: 'Biomolecules & Polymers', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjE5NzE3NjM0MTg0NjA4LTI1NjI1NzMyNTkzNzE2ODE2'}
+                ]
+            },
+            {
+                text: 'Maths Crash course',
+                subcards: [
+                    { text: 'Sets Probability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjI4NzQwMDczNDgyOTIwLTI1NjMxNzQ3NTUzMjQ5MDI0'},
+{ text: 'Complex Number', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjMyNzUwMDQ2NTA0MzkyLTI1NjM4NzY1MDA2MDM2NjAw'},
+{ text: 'Determinants', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjM5NzY3NDk5MjkxOTY4LTI1NjQyNzc0OTc5MDU4MDcy'},
+{ text: 'Matrices', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjQzNzc3NDcyMzEzNDQwLTI1NjQ2Nzg0OTUyMDc5NTQ0'},
+{ text: 'Straight Lines', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjQ3Nzg3NDQ1MzM0OTEyLTI1NjUyNzk5OTExNjExNzUy'},
+{ text: 'Circle', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjUzODAyNDA0ODY3MTIwLTI1NjU2ODA5ODg0NjMzMjI0'},
+{ text: 'Conic Section', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjU3ODEyMzc3ODg4NTkyLTI1NjY0ODI5ODMwNjc2MTY4'},
+{ text: 'Function', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjY1ODMyMzIzOTMxNTM2LTI1Njc1ODU3MjU2NDg1MjE2'},
+{ text: 'ITF', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Njc2ODU5NzQ5NzQwNTg0LTI1NjgwODY5NzIyNzYyMDU2'},
+{ text: 'Limits', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjgxODcyMjE2MDE3NDI0LTI1Njg2ODg0NjgyMjk0MjY0'},
+{ text: 'Continuity', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Njg3ODg3MTc1NTQ5NjMyLTI1NjkxODk3MTQ4NTcxMTA0'},
+{ text: 'Differentiability', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NjkyODk5NjQxODI2NDcyLTI1Njk3OTEyMTA4MTAzMzEy'},
+{ text: 'Differentiation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1Njk4OTE0NjAxMzU4NjgwLTI1NzAxOTIyMDgxMTI0Nzg0'},
+{ text: 'Indefinite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzAyOTI0NTc0MzgwMTUyLTI1NzA1OTMyMDU0MTQ2MjU2'},
+{ text: 'Definite Integration', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzA2OTM0NTQ3NDAxNjI0LTI1NzEwOTQ0NTIwNDIzMDk2'},
+{ text: 'Area Under Curve', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzExOTQ3MDEzNjc4NDY0LTI1NzEyOTQ5NTA2OTMzODMy'},
+{ text: 'AOD', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzEzOTUyMDAwMTg5MjAwLTI1NzIwOTY5NDUyOTc2Nzc2'},
+{ text: 'Differential Equations', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzIxOTcxOTQ2MjMyMTQ0LTI1NzI0OTc5NDI1OTk4MjQ4'},
+{ text: 'Vector', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzI1OTgxOTE5MjUzNjE2LTI1NzI4OTg5Mzk5MDE5NzIw'},
+ { text: '3D Geometry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzI5OTkxODkyMjc1MDg4LTI1NzM0MDAxODY1Mjk2NTYw'},
+{  text: 'Statistics', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzM1MDA0MzU4NTUxOTI4LTI1NzM3MDA5MzQ1MDYyNjY0'},
+{ text: 'Trigonometry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzM4MDExODM4MzE4MDMyLTI1NzQxMDE5MzE4MDg0MTM2'},
+{ text: 'Mathematical Reasoning', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzQyMDIxODExMzM5NTA0LTI1NzQzMDI0MzA0NTk0ODcy'},
+{ text: 'Quadratic Equation', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzQ0MDI2Nzk3ODUwMjQwLTI1NzQ3MDM0Mjc3NjE2MzQ0'},
+{ text: 'Binomial Theorem', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzQ4MDM2NzcwODcxNzEyLTI1NzUwMDQxNzU3MzgyNDQ4'},
+{ text: 'PnC', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1NzUxMDQ0MjUwNjM3ODE2LTI1NzYyMDcxNjc2NDQ2ODY0'}                 
+                ]
+            },
+            {
+                text: 'Jitesh Pareek Enthuse Inorganic',
+                subcards: [
+                    { text: 'Chemical Bonding P2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1OTgwNjE1MjA2MTE3MDg4LTI1OTkzNjQ3NjE4NDM2ODcy'},
+{ text: 'Coordination Compounds', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI1OTk0NjUwMTExNjkyMjQwLTI2MDE1NzAyNDcwMDU0OTY4'},
+{ text: 'S BLOCK', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDE2NzA0OTYzMzEwMzM2LTI2MDIyNzE5OTIyODQyNTQ0'},
+{ text: 'P D F Block', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDIzNzIyNDE2MDk3OTEyLTI2MDI3NzMyMzg5MTE5Mzg0'},
+{ text: 'Hydrogen', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDI4NzM0ODgyMzc0NzUyLTI2MDI4NzM0ODgyMzc0NzUy'},
+{ text: 'Environmental Chemistry', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDI5NzM3Mzc1NjMwMTIwLTI2MDMwNzM5ODY4ODg1NDg4'},
+{ text: 'Salt Analysis (Sanay Sodhani) ', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDMxNzQyMzYyMTQwODU2LTI2MDQyNzY5Nzg3OTQ5OTA0'},
+{ text: 'Metallurgy (Sanay Sodhani)', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDQzNzcyMjgxMjA1MjcyLTI2MDU2ODA0NjkzNTI1MDU2'}
+                ]
+        },
+            {
+                text: 'Leader Physics Kartikey Gupta',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MDU4ODA5NjgwMDM1NzkyLTI2MTA5OTM2ODM2MDU5NTYw'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MTEwOTM5MzI5MzE0OTI4LTI2MTYzMDY4OTc4NTk0MDY0'},
+{ text: 'PART 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MTY0MDcxNDcxODQ5NDMyLTI2MjMwMjM2MDI2NzAzNzIw'}
+                ]
+            },{
+                text: 'Enthuse TQAS Star Batch',
+                subcards: [
+                    { text: 'PART 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MjMxMjM4NTE5OTU5MDg4LTI2Mjk5NDA4MDYxMzI0MTEy'},
+{ text: 'PART 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MzAwNDEwNTU0NTc5NDgwLTI2MzY1NTcyNjE2MTc4NDAw'},
+{ text: 'PART 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2MzY2NTc1MTA5NDMzNzY4LTI2NDI1NzIyMjExNTAwNDgw'},
+{ text: 'PART 4', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NDI2NzI0NzA0NzU1ODQ4LTI2NDgwODU5MzQwNTQ1NzIw'},
+{ text: 'PART 5', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NDgxODYxODMzODAxMDg4LTI2NTMzOTkxNDgzMDgwMjI0'},
+{ text: 'PART 6', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NTM0OTkzOTc2MzM1NTkyLTI2NTc2MDk2MTk5ODA1Njgw'}
+                ]
+            },
+                    ]
+            },      
+            {
+        text: '𝗧𝗲𝘀𝘁 & 𝗠𝗼𝗱𝘂𝗹𝗲𝘀',
+        secondcards: [
+            {
+                text: 'STUFFS & TESTS',
+                subcards: [
+                    { text: 'MODULES', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NTgzMTEzNjUyNTkzMjU2LTI2NjgxMzU3OTkxNjE5MzIw'},
+{ text: 'TNPS QUIZZES', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NjgzMzYyOTc4MTMwMDU2LTI2NzU2NTQ0OTg1NzcxOTIw'}
+                ]
+            },{
+                text: 'Test Series & Revision Sheets',
+                subcards: [
+                    { text: 'Test Series & Revision Sheets', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NzU3NTQ3NDc5MDI3Mjg4LTI2NzcyNTg0ODc3ODU3ODA4'},
+{ text: 'MORE Races & Material', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2NzczNTg3MzcxMTEzMTc2LTI2ODY2ODE5MjQzODYyNDAw'},
+{ text: 'Material', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2ODY3ODIxNzM3MTE3NzY4LTI2OTQxMDAzNzQ0NzU5NjMy'},
+{ text: 'Unorganised Material 1', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI2OTQyMDA2MjM4MDE1MDAwLTI3MDE3MTkzMjMyMTY3NjAw'},
+{ text: 'Unorganised Material 2', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3MDE4MTk1NzI1NDIyOTY4LTI3MDk2MzkwMTk5MzQxNjcy'},
+{ text: 'Unorganised Material 3', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3MDk3MzkyNjkyNTk3MDQwLTI3MTY3NTY3MjIwNDcyODAw'},
+{ text: 'Unorganised Material 4', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3MTY4NTY5NzEzNzI4MTY4LTI3MjQ3NzY2NjgwOTAyMjQw'},
+{ text: 'Unorganised Material 5', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3MjQ4NzY5MTc0MTU3NjA4LTI3MzEyOTI4NzQyNTAxMTYw'},
+{ text: 'Unorganised Material 6', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3MzEzOTMxMjM1NzU2NTI4LTI3MzY4MDY1ODcxNTQ2NDAw'},
+{ text: 'Unorganised Material 7', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3MzY5MDY4MzY0ODAxNzY4LTI3NDUzMjc3Nzk4MjUyNjgw'},
+{ text: 'Unorganised Material 8', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3NDU0MjgwMjkxNTA4MDQ4LTI3NTI0NDU0ODE5MzgzODA4'},
+{ text: 'Unorganised Material 9', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3NTI1NDU3MzEyNjM5MTc2LTI3NjAyNjQ5MjkzMzAyNTEy'},
+{ text: 'Unorganised Material 10', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3NjAzNjUxNzg2NTU3ODgwLTI3NjY4ODEzODQ4MTU2ODAw'},
+{ text: 'Unorganised Material 11', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3NjY5ODE2MzQxNDEyMTY4LTI3NzUzMDIzMjgxNjA3NzEy'},
+{ text: 'Unorganised Material 12', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3NzU0MDI1Nzc0ODYzMDgwLTI3ODI1MjAyNzk1OTk0MjA4'},
+{ text: 'Unorganised Material 13', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3ODI2MjA1Mjg5MjQ5NTc2LTI3ODc5MzM3NDMxNzg0MDgw'},
+{ text: 'Unorganised Material 14', url: 'https://dusra-aur.github.io/servertokens/?token=Z2V0LTI3ODgwMzM5OTI1MDM5NDQ4LTI3OTUzNTIxOTMyNjgxMzEy'}
+                ]
+                   },
+                    ]
+              }         
+];
+
+function createCard(cardData, isSecondCard = false) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        ${cardData.text}
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="${isSecondCard ? '#FF0000' : '#FF0000'}" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+        </svg>
+    `;
+
+    if (isSecondCard) {
+        card.classList.add('second-card');
+        card.addEventListener('click', function () {
+            const subcards = this.nextElementSibling;
+            if (subcards.style.display === 'none' || subcards.style.display === '') {
+                subcards.style.display = 'block';
+            } else {
+                subcards.style.display = 'none';
+            }
+        });
+    } else {
+        card.addEventListener('click', function () {
+            const secondCards = this.nextElementSibling;
+            if (secondCards.style.display === 'none' || secondCards.style.display === '') {
+                secondCards.style.display = 'block';
+            } else {
+                secondCards.style.display = 'none';
+            }
+        });
+    }
+
+    const subcardsContainer = document.createElement('div');
+    subcardsContainer.className = 'subcards';
+
+    cardData.subcards?.forEach(subcardData => {
+        const subcard = document.createElement('div');
+        subcard.className = 'subcard';
+        subcard.innerHTML = `
+            ${subcardData.text}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#00FFFF" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                <path d="M4.715 6.542a3.025 3.025 0 0 1 0-4.27l1.795-1.796a3.025 3.025 0 0 1 4.271 0l1.795 1.796a3.025 3.025 0 0 1 0 4.27l-.69.691a.5.5 0 1 1-.708-.708l.69-.691a2.025 2.025 0 0 0 0-2.855L10.06 2.12a2.025 2.025 0 0 0-2.855 0L5.412 3.915a2.025 2.025 0 0 0 0 2.855.5.5 0 0 1-.707.707ZM11.284 9.457a3.025 3.025 0 0 1 0 4.271l-1.796 1.795a3.025 3.025 0 0 1-4.27 0L3.923 13.73a3.025 3.025 0 0 1 0-4.271l.69-.69a.5.5 0 0 1 .707.707l-.69.69a2.025 2.025 0 0 0 0 2.855l1.795 1.795a2.025 2.025 0 0 0 2.855 0l1.796-1.795a2.025 2.025 0 0 0 0-2.855.5.5 0 1 1 .707-.707Z"/>
+            </svg>
+        `;
+        subcard.addEventListener('click', () => window.open(subcardData.url, '_blank'));
+        subcardsContainer.appendChild(subcard);
+    });
+
+    cardData.secondcards?.forEach(secondCardData => {
+        const secondCard = createCard(secondCardData, true);
+        subcardsContainer.appendChild(secondCard);
+    });
+
+    const container = document.createElement('div');
+    container.appendChild(card);
+    container.appendChild(subcardsContainer);
+
+    return container;
+}
+
+function initializeCards() {
+    const cardsContainer = document.getElementById('cards-container');
+    firstcardsData.forEach(cardData => {
+        const card = createCard(cardData);
+        cardsContainer.appendChild(card);
+    });
+}
+
+initializeCards();
+</script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '546d95d2f0997e0d1d3083947c642f91',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/546d95d2f0997e0d1d3083947c642f91/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'a9647c7fca9c7a0468b362a1ae1dfd7e',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/a9647c7fca9c7a0468b362a1ae1dfd7e/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'a9647c7fca9c7a0468b362a1ae1dfd7e',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/a9647c7fca9c7a0468b362a1ae1dfd7e/invoke.js"></script>
+<div>
+<p style="color: #C09DFF; font-size:16px;">𝗡𝗢𝗧𝗘 :- 𝐍𝐨 𝐚𝐧𝐲 𝐂𝐨𝐚𝐜𝐡𝐢𝐧𝐠 𝐡𝐚𝐫𝐦𝐞𝐝 𝐢𝐟 𝐬𝐭𝐢𝐥𝐥 𝐚𝐧𝐲 𝐩𝐫𝐨𝐛𝐥𝐞𝐦 𝐑𝐞𝐥𝐚𝐭𝐞𝐝 𝐭𝐨 𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐭𝐡𝐞𝐧 𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐦𝐞 𝐨𝐧 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐈 𝐑𝐞𝐦𝐨𝐯𝐞 𝐂𝐨𝐧𝐭𝐞𝐧𝐭 𝐨𝐫 𝐃𝐨𝐰𝐧 𝐭𝐡𝐢𝐬 𝐰𝐞𝐛𝐬𝐢𝐭𝐞 . 𝐒𝐨, 𝙞𝙛 𝙮𝙤𝙪 𝙝𝙖𝙫𝙚 𝙖𝙣𝙮 𝙥𝙧𝙤𝙗𝙡𝙚𝙢 𝙟𝙪𝙨𝙩 𝙘𝙤𝙣𝙩𝙖𝙘𝙩 𝙢𝙚 🙏🙏</p>
+<div style="display: flex; justify-content: center; height: 5vh;"> <button style="background-color:#FF0042; color:white; padding:5px 30px; font-size:16px; border-radius: 20px;"><a href="https://t.me/team_hiddens_bot" style="color:white; text-decoration:none;">𝗖𝗢𝗡𝗧𝗔𝗖𝗧 𝗨𝗦 🙏🙏</a></button> </div>
+
+</body>
+</html>
